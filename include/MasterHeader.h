@@ -23,8 +23,8 @@ using namespace std;
 #include "engine/TimeManager.h"
 #include "engine/KeyFrames.h"
 #include "engine/Animation.h"
-#include "engine/AnimStateController.h"
 #include "engine/AnimationFactory.h"
+#include "engine/AnimStateController.h"
 #include "objects/GameObjects.h"
 #include "objects/ObjFactory.h"
 

@@ -13,13 +13,21 @@ int main()
    raylib::Window w(screenWidth, screenHeight, "C++ Easing Maths Visualized");
    SetTargetFPS(60);
 
-    // Test reasings.h
+   // Test reasings.h
    int ballPositionX = 300;
+
+   // Steps for creating an animation:
+   //    1) instantiate a KeyFrames.h
+   //    2) instantiate a AnimStateController.h
+   //    3) instantiate a Animation.h
+   //       then you can ".apply()" to whatever obj you desire, for ex: "animController_01.apply(myRect, myAnim, keyFrame01);"
+   AnimStateController animController_01(AnimationState::Play);
+   Animation myAnim = createElasticOutAnimation(keyFrame01);
 
    // Main game loop
    while (!w.ShouldClose()) // Detect window close button or ESC key
    {
-
+      // Generic aproach to easing calls
       ballPositionX = (int)EaseElasticOut(TimeClass::framesCounterResetable, 300, 800, 120);
 
       // Drawing context loop:
@@ -35,8 +43,7 @@ int main()
       DrawRectangle(myRect.x, myRect.y, myRect.h, myRect.y, WHITE);
 
       // Animation tests
-      AnimStateController animController_01(AnimationState::Play);
-      animController_01.apply(myRect, animElasticOut, keyFrame01);
+      animController_01.apply(myRect, myAnim, keyFrame01);
 
       EndDrawing();
    }

@@ -29,9 +29,12 @@ class AnimStateController
       // Additional inits if needed
    }
 
+
    template <typename T>
    void apply(T& obj, Animation& animation, KeyFrames keyframe)
    {
+
+
       // Play animation if
       if(state == AnimationState::Play)
       {

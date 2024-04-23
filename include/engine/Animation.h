@@ -49,17 +49,17 @@ class Animation
    Animation
    (
       // Arguments
-      AnimationTarget                  target         ,
-      TweenType                        tween          ,
-      KeyFrames                        positions      ,
+      AnimationTarget                  target         , // Alpha, Position, Color, Vertice
+      TweenType                        tween          , // TweenElasticIn, TweenElasticOut
+      KeyFrames                        positions      , // KeyFrames.h KeyFrames defaultKeyFrame = {{300,1000},   {200,200}};
       const std::vector<MyColors>&     colors =   {}  , // optional overload
       const std::vector<MyVertices>&   vertices = {}  , // optional overload
       float                            alpha =  1.0f  , // optional overload
-      int                              initialized = 0,
-      int                              origX       = 0,
-      int                              origY       = 0,
-      int                              xPosIteratr = 0,
-      int                              yPosIteratr = 0
+      int                              initialized = 0, // optional overload
+      int                              origX       = 0, // optional overload
+      int                              origY       = 0, // optional overload
+      int                              xPosIteratr = 0, // optional overload
+      int                              yPosIteratr = 0  // optional overload
    )
    :
       // ".this" initilizers
@@ -148,8 +148,8 @@ class Animation
    }
 }; 
 
-Animation animElasticOut(
-   AnimationTarget::Position,
-   TweenType::TweenElasticOut,
-   keyFrame01
-);
+// Animation animElasticOut(
+//    AnimationTarget::Position,
+//    TweenType::TweenElasticOut,
+//    keyFrame01
+// );
