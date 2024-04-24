@@ -2,6 +2,16 @@
 
 int main()
 {
+
+
+    Camera3D camera = { 0 };
+    camera.position = (Vector3){ 0.0f, 10.0f, 10.0f };  // Camera position
+    camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };      // Camera looking at point
+    camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };          // Camera up vector (rotation towards target)
+    camera.fovy = 45.0f;                                // Camera field-of-view Y
+    camera.projection = CAMERA_PERSPECTIVE;             // Camera mode type
+
+
    // 2D - Initializations
    int screenWidth = 1600;
    int screenHeight = 1000;
@@ -24,6 +34,10 @@ int main()
    AnimStateController animController_01(AnimationState::Play);
    Animation myAnim = createElasticOutAnimation(keyFrame01);
 
+   // 3d target
+   RenderTexture2D target = LoadRenderTexture(100, 100);
+   Rectangle customRect = { screenWidth / 2.f - 50.f, screenHeight / 2.f - 50.f, 100.f, 100.f };
+
    // Main game loop
    while (!w.ShouldClose()) // Detect window close button or ESC key
    {
@@ -44,6 +58,13 @@ int main()
 
       // Animation tests
       animController_01.apply(myRect, myAnim, keyFrame01);
+
+      // Attempt 3D mode between textures
+      draw3DContext(target, camera, customRect);
+
+         
+
+
 
       EndDrawing();
    }

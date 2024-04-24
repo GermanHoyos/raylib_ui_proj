@@ -27,4 +27,5 @@ using namespace std;
 #include "engine/AnimStateController.h"
 #include "objects/GameObjects.h"
 #include "objects/ObjFactory.h"
+#include "engine/3DContext.h"
 
