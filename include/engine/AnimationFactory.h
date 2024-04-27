@@ -1,7 +1,6 @@
 #pragma once
 #include "../MasterHeader.h"// Include necessary headers to access GetTime() and other functions
 
-
 Animation createElasticOutAnimation(const KeyFrames& keyframe) {
     return Animation(AnimationTarget::Position, TweenType::TweenElasticOut, keyframe);
 }
