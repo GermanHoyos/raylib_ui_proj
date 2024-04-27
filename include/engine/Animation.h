@@ -40,10 +40,12 @@ class Animation
    std::vector<MyVertices> vertices    ;
    float                   alpha       ;
    int                     initialized ;
-   float                     origX       ;
-   float                     origY       ;
-   float                     xPosIteratr ;
-   float                     yPosIteratr ;
+   float                   origX       ;
+   float                   origY       ;
+   float                   origZ       ;
+   float                   xPosIteratr ;
+   float                   yPosIteratr ;
+   float                   zPosIteratr ;
 
    // Constructor
    Animation
@@ -56,10 +58,12 @@ class Animation
       const std::vector<MyVertices>&   vertices = {}  , // optional overload
       float                            alpha =  1.0f  , // optional overload
       int                              initialized = 0, // optional overload
-      float                              origX       = 0.0f, // optional overload
-      float                              origY       = 0.0f, // optional overload
-      float                              xPosIteratr = 0.0f, // optional overload
-      float                              yPosIteratr = 0.0f  // optional overload
+      float                            origX       = 0.0f, // optional overload
+      float                            origY       = 0.0f, // optional overload
+      float                            origZ       = 0.0f,
+      float                            xPosIteratr = 0.0f, // optional overload
+      float                            yPosIteratr = 0.0f, // optional overload
+      float                            zPosIteratr = 0.0f
    )
    :
       // ".this" initilizers
@@ -72,8 +76,10 @@ class Animation
       initialized(initialized),
       origX(origX)            ,
       origY(origY)            ,
+      origZ(origZ)            ,
       xPosIteratr(xPosIteratr),
-      yPosIteratr(yPosIteratr)
+      yPosIteratr(yPosIteratr),
+      zPosIteratr(zPosIteratr)
    {
       // Additional inits here
    }
@@ -120,9 +126,9 @@ class Animation
          }
          else if (tween == TweenType::TweenElasticOut)
          {
-            
             obj.x = EaseElasticOut(TimeClass::framesCounterResetable, this->origX, keyframe[0][0], 120);
             obj.y = EaseElasticOut(TimeClass::framesCounterResetable, this->origY, keyframe[0][1], 120);
+            obj.z = EaseElasticOut(TimeClass::framesCounterResetable, this->origZ, keyframe[0][2], 120);
          }
       }
       else if (target == AnimationTarget::Color)
