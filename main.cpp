@@ -5,7 +5,7 @@ int main()
 
    // Initilize the camera
    Camera3D camera = { 0 };
-   camera.position = (Vector3){ 0.0f, 2.2f, 8.99f };// X,Y,Z position of camera
+   camera.position = (Vector3){ 0.0f, 2.2f, -8.99f };// X,Y,Z position of camera
    camera.target = (Vector3){ 0.0f, 2.3f, 0.0f };  // Where is the camera pointing to
    camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };      // Which way is up for the camera
    camera.fovy = 60.0f;                            // Camera field-of-view Y

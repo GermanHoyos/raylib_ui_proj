@@ -40,10 +40,10 @@ class Animation
    std::vector<MyVertices> vertices    ;
    float                   alpha       ;
    int                     initialized ;
-   int                     origX       ;
-   int                     origY       ;
-   int                     xPosIteratr ;
-   int                     yPosIteratr ;
+   float                     origX       ;
+   float                     origY       ;
+   float                     xPosIteratr ;
+   float                     yPosIteratr ;
 
    // Constructor
    Animation
@@ -56,10 +56,10 @@ class Animation
       const std::vector<MyVertices>&   vertices = {}  , // optional overload
       float                            alpha =  1.0f  , // optional overload
       int                              initialized = 0, // optional overload
-      int                              origX       = 0, // optional overload
-      int                              origY       = 0, // optional overload
-      int                              xPosIteratr = 0, // optional overload
-      int                              yPosIteratr = 0  // optional overload
+      float                              origX       = 0.0f, // optional overload
+      float                              origY       = 0.0f, // optional overload
+      float                              xPosIteratr = 0.0f, // optional overload
+      float                              yPosIteratr = 0.0f  // optional overload
    )
    :
       // ".this" initilizers
@@ -120,7 +120,9 @@ class Animation
          }
          else if (tween == TweenType::TweenElasticOut)
          {
-            obj.x = (int)EaseElasticOut(TimeClass::framesCounterResetable, this->origX, keyframe[0][1], 120);
+            
+            obj.x = EaseElasticOut(TimeClass::framesCounterResetable, this->origX, keyframe[0][0], 120);
+            obj.y = EaseElasticOut(TimeClass::framesCounterResetable, this->origY, keyframe[0][1], 120);
          }
       }
       else if (target == AnimationTarget::Color)

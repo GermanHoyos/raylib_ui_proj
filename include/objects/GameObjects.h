@@ -46,6 +46,10 @@ class CubeObj
    {
       DrawCube({x,y,z}, 1.0f, 1.0f, 1.0f, RED);
 
+      //test axis relative to the camera position and angle
+      // x = x + 0.02f;    // (+) = to the RIGHT ->    (-) = to the LEFT <-
+      // y = y + 0.02f;    // (+) = up ^               (-) = down \/
+      // z = z - 0.02f;    // (+) = foward             (-) = backward
    }
 
 };
