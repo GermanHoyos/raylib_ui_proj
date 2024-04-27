@@ -3,14 +3,13 @@
 int main()
 {
 
-
-    Camera3D camera = { 0 };
-    camera.position = (Vector3){ 0.0f, 10.0f, 10.0f };  // Camera position
-    camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };      // Camera looking at point
-    camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };          // Camera up vector (rotation towards target)
-    camera.fovy = 45.0f;                                // Camera field-of-view Y
-    camera.projection = CAMERA_PERSPECTIVE;             // Camera mode type
-
+   // Initilize the camera
+   Camera3D camera = { 0 };
+   camera.position = (Vector3){ 0.0f, 2.2f, 10.f };
+   camera.target = (Vector3){ 0.0f, 2.3f, 0.0f };
+   camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };
+   camera.fovy = 60.0f;                           // Camera field-of-view Y
+   camera.projection = CAMERA_PERSPECTIVE;             // Camera mode type
 
    // 2D - Initializations
    int screenWidth = 1600;
@@ -34,9 +33,7 @@ int main()
    AnimStateController animController_01(AnimationState::Play);
    Animation myAnim = createElasticOutAnimation(keyFrame01);
 
-   // 3d target
-   RenderTexture2D target = LoadRenderTexture(100, 100);
-   Rectangle customRect = { screenWidth / 2.f - 50.f, screenHeight / 2.f - 50.f, 100.f, 100.f };
+   // This defines the 3D context window by which Textures can be displayed
 
    // Main game loop
    while (!w.ShouldClose()) // Detect window close button or ESC key
@@ -47,6 +44,10 @@ int main()
       // Drawing context loop:
       BeginDrawing();
       ClearBackground(BLACK);
+      
+      //Z index of the 3D render is before all other 2d objects
+      draw3DContext(camera);
+
       TimeClass::displayGameTime();
 
       // Define section borders and descriptions
@@ -58,13 +59,6 @@ int main()
 
       // Animation tests
       animController_01.apply(myRect, myAnim, keyFrame01);
-
-      // Attempt 3D mode between textures
-      draw3DContext(target, camera, customRect);
-
-         
-
-
 
       EndDrawing();
    }
