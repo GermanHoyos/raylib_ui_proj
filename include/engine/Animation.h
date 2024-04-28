@@ -43,27 +43,29 @@ class Animation
    float                   origX       ;
    float                   origY       ;
    float                   origZ       ;
-   float                   xPosIteratr ;
-   float                   yPosIteratr ;
-   float                   zPosIteratr ;
+   int                     xPosIteratr ;
+   int                     yPosIteratr ;
+   int                     zPosIteratr ;
+   int                        animIndex;
 
    // Constructor
    Animation
    (
       // Arguments
-      AnimationTarget                  target         , // Alpha, Position, Color, Vertice
-      TweenType                        tween          , // TweenElasticIn, TweenElasticOut
-      KeyFrames                        positions      , // KeyFrames.h KeyFrames defaultKeyFrame = {{300,1000},   {200,200}};
-      const std::vector<MyColors>&     colors =   {}  , // optional overload
-      const std::vector<MyVertices>&   vertices = {}  , // optional overload
-      float                            alpha =  1.0f  , // optional overload
-      int                              initialized = 0, // optional overload
+      AnimationTarget                  target            , // Alpha, Position, Color, Vertice
+      TweenType                        tween             , // TweenElasticIn, TweenElasticOut
+      KeyFrames                        positions         , // KeyFrames.h KeyFrames defaultKeyFrame = {{300,1000},   {200,200}};
+      const std::vector<MyColors>&     colors      =   {}, // optional overload
+      const std::vector<MyVertices>&   vertices    =   {}, // optional overload
+      float                            alpha       = 1.0f, // optional overload
+      int                              initialized =    0, // optional overload
       float                            origX       = 0.0f, // optional overload
       float                            origY       = 0.0f, // optional overload
       float                            origZ       = 0.0f,
-      float                            xPosIteratr = 0.0f, // optional overload
-      float                            yPosIteratr = 0.0f, // optional overload
-      float                            zPosIteratr = 0.0f
+      int                                 xPosIteratr = 0, // optional overload
+      int                                 yPosIteratr = 0, // optional overload
+      int                                 zPosIteratr = 0,
+      int                                   animIndex = 0
    )
    :
       // ".this" initilizers
@@ -79,7 +81,8 @@ class Animation
       origZ(origZ)            ,
       xPosIteratr(xPosIteratr),
       yPosIteratr(yPosIteratr),
-      zPosIteratr(zPosIteratr)
+      zPosIteratr(zPosIteratr),
+      animIndex(animIndex)
    {
       // Additional inits here
    }
@@ -87,25 +90,35 @@ class Animation
    template <typename T>
    void animate(T& obj, KeyFrames keyframe)
    {
-      // The objects start position
-      if (this->initialized == 0)
+      /* Example keyframe
+         KeyFrames keyFrame01 = 
+         {//{x     ,y     ,     z}
+            {130.0f, 60.0f, 0.00f},
+            {100.0f, 50.0f, 0.00f}
+         };
+      */
+
+      if (animIndex < keyframe.size()) // size = 2
       {
-         this->initialized = 1;
-         this->origX = obj.x;
-         // std::string initStr = std::to_string(initialized);
-         // const char* initChar = initStr.c_str();
-         // DrawText(initChar, 20, 200, 20, WHITE);
+         float xDistance = fabs(obj.x - keyframe[animIndex][0]);
+         float yDistance = fabs(obj.y - keyframe[animIndex][1]);
+         //float zDistance = (obj.z - keyframe[animIndex][2]);
+
+         string xDistStr = to_string(xDistance);
+         string yDistStr = to_string(yDistance);
+         string animIndx = to_string(this->animIndex);
+         string keyframeSize = to_string(keyframe.size());
+         DrawText(xDistStr.c_str(), 2, 100, 20, GREEN);
+         DrawText(yDistStr.c_str(), 2, 125, 20, GREEN);
+         DrawText(animIndx.c_str(), 2, 150, 20, GREEN);
+         DrawText(keyframeSize.c_str(), 2, 180, 20, GREEN);
+
+
+         if (xDistance < 0.000001f && yDistance < 0.000001f && animIndex < 1)
+         {
+            this->animIndex++;
+         }
       }
-
-      // Iterate through the passed keyframe positions as each
-      // position is reached
-      // float distanceFromPoint = sqrt((obj.x - ));
-      // if (obj.x){
-
-      // }
-
-
-
 
       if (target == AnimationTarget::Alpha)
       {
@@ -126,9 +139,9 @@ class Animation
          }
          else if (tween == TweenType::TweenElasticOut)
          {
-            obj.x = EaseElasticOut(TimeClass::framesCounterResetable, this->origX, keyframe[0][0], 220);
-            obj.y = EaseElasticOut(TimeClass::framesCounterResetable, this->origY, keyframe[0][1], 220);
-            obj.z = EaseElasticOut(TimeClass::framesCounterResetable, this->origZ, keyframe[0][2], 220);
+            obj.x = EaseElasticOut(TimeClass::framesCounterResetable, this->origX, keyframe[this->animIndex][0], 220);
+            obj.y = EaseElasticOut(TimeClass::framesCounterResetable, this->origY, keyframe[this->animIndex][1], 220);
+            obj.z = EaseElasticOut(TimeClass::framesCounterResetable, this->origZ, keyframe[this->animIndex][2], 220);
          }
       }
       else if (target == AnimationTarget::Color)
@@ -155,9 +168,3 @@ class Animation
       }
    }
 }; 
-
-// Animation animElasticOut(
-//    AnimationTarget::Position,
-//    TweenType::TweenElasticOut,
-//    keyFrame01
-// );

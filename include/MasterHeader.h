@@ -13,6 +13,7 @@
 #include <iomanip>
 #include <vector>
 #include <random>
+#include <assert.h>
 using namespace std;
 
 // A port of Robert Penner's easing equations to C (http://robertpenner.com/easing/)

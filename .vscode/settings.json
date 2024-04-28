@@ -1,6 +1,8 @@
 {
    "C_Cpp.errorSquiggles": "disabled",
    "files.associations": {
-      "algorithm": "cpp"
+      "algorithm": "cpp",
+      "cmath": "cpp",
+      "string_view": "cpp"
    }
 }
