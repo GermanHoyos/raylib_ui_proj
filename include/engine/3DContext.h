@@ -7,16 +7,16 @@ Animation animCube = createElasticOutAnimation(tween3D_01);
 
 void draw3DContext(Camera& camera) {
    // CAMERA_OBITAL is an enum
-   // UpdateCamera(&camera, CAMERA_ORBITAL); // <-- rotate the camera
+   //UpdateCamera(&camera, CAMERA_ORBITAL); // <-- rotate the camera
    BeginMode3D(camera);
 
    DrawGrid(10, 1.0f);
 
    myCube.drawCubeMthd();
-   animController_02.apply(myCube, animCube, tween3D_01);
+   //animController_02.apply(myCube, animCube, tween3D_01);
+   //camera.target = {myCube.x,myCube.y,myCube.z};
 
-
-
+   DrawLine3D((Vector3){ -5.0f, 0.0f, 0.0f }, (Vector3){ 5.0f, 0.0f, 0.0f }, RED);
 
    EndMode3D();
 }

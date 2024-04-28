@@ -126,9 +126,9 @@ class Animation
          }
          else if (tween == TweenType::TweenElasticOut)
          {
-            obj.x = EaseElasticOut(TimeClass::framesCounterResetable, this->origX, keyframe[0][0], 120);
-            obj.y = EaseElasticOut(TimeClass::framesCounterResetable, this->origY, keyframe[0][1], 120);
-            obj.z = EaseElasticOut(TimeClass::framesCounterResetable, this->origZ, keyframe[0][2], 120);
+            obj.x = EaseElasticOut(TimeClass::framesCounterResetable, this->origX, keyframe[0][0], 220);
+            obj.y = EaseElasticOut(TimeClass::framesCounterResetable, this->origY, keyframe[0][1], 220);
+            obj.z = EaseElasticOut(TimeClass::framesCounterResetable, this->origZ, keyframe[0][2], 220);
          }
       }
       else if (target == AnimationTarget::Color)
